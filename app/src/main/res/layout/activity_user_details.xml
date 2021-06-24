@@ -1,0 +1,348 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Activities.UserDetailsActivity">
+
+
+    <LinearLayout
+        android:id="@+id/ll_regBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:background="@color/Text_Button"
+        android:orientation="horizontal"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:gravity="center"
+            android:text="Registration"
+            android:textColor="@color/white"
+            android:textSize="25sp" />
+
+    </LinearLayout>
+    <ScrollView
+        android:layout_below="@id/ll_regBar"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:gravity="center"
+                android:theme="@style/Theme.MaterialComponents.DayNight.DarkActionBar"
+                android:orientation="vertical">
+
+
+
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:layout_margin="10dp"
+                    android:background="@drawable/background_details">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/et_userName"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:hint="Username"
+                        android:textColorHint="#808080"
+                        android:theme="@style/Theme.App.Base" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:layout_margin="10dp"
+                    android:background="@drawable/background_details">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/et_email"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:hint="Email"
+                        android:textColorHint="#808080"
+                        android:theme="@style/Theme.App.Base" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:layout_margin="10dp"
+                    android:background="@drawable/background_details">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/et_mobileNo"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:hint="Mobile No"
+                        android:textColorHint="#808080"
+                        android:inputType="phone"
+                        android:theme="@style/Theme.App.Base" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:layout_margin="10dp"
+                    android:background="@drawable/background_details">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/et_password"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:textColorHint="#808080"
+                        android:hint="Password"
+                        android:inputType="textWebPassword"
+                        android:theme="@style/Theme.App.Base" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:layout_margin="10dp"
+                    android:background="@drawable/background_details">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/tv_dob"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:textColorHint="#808080"
+                        android:drawableRight="@drawable/ic_calendar"
+                        android:hint="Date Of Birth"
+                        android:theme="@style/Theme.App.Base" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:orientation="vertical"
+                    android:padding="10dp">
+
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:gravity="center_vertical"
+                        android:text="Gender"
+                        android:textSize="15sp" />
+
+                    <RadioGroup
+                        android:id="@+id/radioGp_gender"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:orientation="horizontal">
+
+                        <RadioButton
+                            android:id="@+id/radioBtn_male"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Male" />
+
+                        <RadioButton
+                            android:id="@+id/radioBtn_female"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Female" />
+
+                        <RadioButton
+                            android:id="@+id/radioBtn_other"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Other" />
+
+                    </RadioGroup>
+
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:padding="10dp"
+                    android:background="@drawable/background_edittext">
+
+
+                    <Spinner
+                        android:id="@+id/spinner"
+                        android:layout_width="match_parent"
+                        android:layout_height="30dp"
+                        android:gravity="center"
+                        />
+
+                </LinearLayout>
+
+
+
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:layout_margin="10dp"
+                    android:background="@drawable/background_details">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/et_address"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:textColorHint="#808080"
+                        android:hint="Address"
+                        android:inputType="textPostalAddress"
+                        android:theme="@style/Theme.App.Base" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+
+
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:layout_margin="10dp"
+                    android:background="@drawable/background_details">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/et_pinCode"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:textColorHint="#808080"
+                        android:hint="PinCode"
+                        android:inputType="number"
+                        android:theme="@style/Theme.App.Base" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:layout_margin="10dp"
+                    android:background="@drawable/background_details">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/et_city"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:textColorHint="#808080"
+                        android:hint="City"
+
+                        android:theme="@style/Theme.App.Base" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:layout_margin="10dp"
+                    android:background="@drawable/background_details">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/et_state"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:textColorHint="#808080"
+                        android:hint="State"
+                        android:theme="@style/Theme.App.Base" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+
+
+
+
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:layout_margin="10dp"
+                    android:background="@drawable/background_details">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/et_country"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:textColorHint="#808080"
+                        android:hint="Country"
+                        android:theme="@style/Theme.App.Base" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:orientation="vertical"
+                    android:padding="10dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:text="Have you Suffered From CO-VID 19 ?"
+                        android:textSize="15sp" />
+
+                    <RadioGroup
+                        android:id="@+id/radioGp_suffered"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:orientation="horizontal">
+
+                        <RadioButton
+                            android:id="@+id/radioBtn_yes"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Yes" />
+
+                        <RadioButton
+                            android:id="@+id/radioBtn_no"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="No" />
+                    </RadioGroup>
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/submitBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Submit"
+                android:layout_gravity="right"
+                android:layout_marginBottom="10dp"
+                android:layout_marginRight="20dp"
+                android:textSize="20sp"
+                android:textColor="@color/white"
+                android:background="@drawable/background_save_btn"/>
+
+
+
+
+        </LinearLayout>
+    </ScrollView>
+
+</RelativeLayout>
