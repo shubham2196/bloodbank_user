@@ -52,6 +52,7 @@ public class MyDetails_Fragment extends Fragment {
 
 
         currentUser=UserHelperClass.getCurrentUser_username();
+//        Toast.makeText(getActivity(), currentUser, Toast.LENGTH_SHORT).show();
 
         DatabaseReference reference= FirebaseDatabase.getInstance().getReference("UserDetails");
 

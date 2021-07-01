@@ -2,7 +2,7 @@ package com.example.bloodbank;
 
 public class UserHelperClass {
 
-    String username, emailId, mobileNo, password, address, pinCode,city, state, country,bloodGroup,gender,suffered,dob;
+    String username, emailId, mobileNo,  address, pinCode,city, state, country,bloodGroup,gender,suffered,dob;
 
     public static String getCurrentUser_username() {
         return currentUser_username;
@@ -16,11 +16,10 @@ public class UserHelperClass {
 
     public  UserHelperClass(){}
 
-    public UserHelperClass(String username, String emailId, String mobileNo, String password, String dob, String gender,String bloodGroup, String address ,String pinCode, String city, String state, String country, String suffered) {
+    public UserHelperClass(String username, String emailId, String mobileNo, String dob, String gender,String bloodGroup, String address ,String pinCode, String city, String state, String country, String suffered) {
         this.username = username;
         this.emailId = emailId;
         this.mobileNo = mobileNo;
-        this.password = password;
         this.address = address;
         this.pinCode = pinCode;
         this.city = city;
@@ -56,13 +55,6 @@ public class UserHelperClass {
         this.mobileNo = mobileNo;
     }
 
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
 
     public String getAddress() {
         return address;

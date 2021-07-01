@@ -55,7 +55,7 @@ public class EditProfileActivity extends AppCompatActivity {
     FragmentManager  fragmentManager;
     FragmentTransaction fragmentTransaction;
     Spinner spinner_bloodGroup;
-    Button save,changePasswordBtn;
+    Button save;
     DatePicker picker;
     String currentUser;
     DatabaseReference reference;
@@ -107,7 +107,6 @@ public class EditProfileActivity extends AppCompatActivity {
 
 
         save = findViewById(R.id.saveBtn);
-        changePasswordBtn=findViewById(R.id.changePassBtn);
 
         spinner_bloodGroup = findViewById(R.id.spinner);
         ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_list_item_1, getResources().getStringArray(R.array.Blood_Group));
@@ -221,64 +220,64 @@ public class EditProfileActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-        changePasswordBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Dialog dialog = new Dialog(EditProfileActivity.this);
-                dialog.setContentView(R.layout.dialogbox_change_password);
-                dialog.getWindow().setBackgroundDrawableResource(R.drawable.background_dialog);
-
-
-                TextView cpass, npass, rpass,change,close;
-                cpass = dialog.findViewById(R.id.et_current_password);
-                npass = dialog.findViewById(R.id.et_new_password);
-                rpass = dialog.findViewById(R.id.et_reEnter_password);
-                change = dialog.findViewById(R.id.dialog_change);
-                close = dialog.findViewById(R.id.close);
-
-                close.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        dialog.dismiss();
-                    }
-                });
-                change.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        if (!npass.getText().toString().equals(rpass.getText().toString())) {
-                            Toast.makeText(getApplicationContext(), "Password Not Matched", Toast.LENGTH_SHORT).show();
-                            dialog.cancel();
-                        }
-                        else if (!(npass.getText().toString().matches(passwordVal)))
-                        {
-                            Toast.makeText(getApplicationContext(), "Password is too weak", Toast.LENGTH_SHORT).show();
-                        }else if (!cpass.getText().toString().equals(userCurrentPassword)) {
-                            Toast.makeText(getApplicationContext(), "Current Password is Wrong.", Toast.LENGTH_SHORT).show();
-                            dialog.cancel();
-                        } else {
-                            FirebaseDatabase.getInstance().getReference().child("UserDetails")
-                                    .child(currentUser)
-                                    .child("password").setValue(npass.getText().toString()).addOnSuccessListener(new OnSuccessListener<Void>() {
-                                @Override
-                                public void onSuccess(Void aVoid) {
-//                                    UserHolder.getInstance().setPass(npass.getText().toString());
-                                    Toast.makeText(getApplicationContext(), "Password Changed", Toast.LENGTH_SHORT).show();
-                                    dialog.cancel();
-                                }
-                            }).addOnFailureListener(new OnFailureListener() {
-                                @Override
-                                public void onFailure(@NonNull Exception e) {
-                                    Toast.makeText(getApplicationContext(), "Error", Toast.LENGTH_SHORT).show();
-                                    dialog.cancel();
-                                }
-                            });}
-                    }
-                });
-
-                dialog.setCancelable(true);
-                dialog.show();
-            }
-        });
+//        changePasswordBtn.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Dialog dialog = new Dialog(EditProfileActivity.this);
+//                dialog.setContentView(R.layout.dialogbox_change_password);
+//                dialog.getWindow().setBackgroundDrawableResource(R.drawable.background_dialog);
+//
+//
+//                TextView cpass, npass, rpass,change,close;
+//                cpass = dialog.findViewById(R.id.et_current_password);
+//                npass = dialog.findViewById(R.id.et_new_password);
+//                rpass = dialog.findViewById(R.id.et_reEnter_password);
+//                change = dialog.findViewById(R.id.dialog_change);
+//                close = dialog.findViewById(R.id.close);
+//
+//                close.setOnClickListener(new View.OnClickListener() {
+//                    @Override
+//                    public void onClick(View v) {
+//                        dialog.dismiss();
+//                    }
+//                });
+//                change.setOnClickListener(new View.OnClickListener() {
+//                    @Override
+//                    public void onClick(View v) {
+//                        if (!npass.getText().toString().equals(rpass.getText().toString())) {
+//                            Toast.makeText(getApplicationContext(), "Password Not Matched", Toast.LENGTH_SHORT).show();
+//                            dialog.cancel();
+//                        }
+//                        else if (!(npass.getText().toString().matches(passwordVal)))
+//                        {
+//                            Toast.makeText(getApplicationContext(), "Password is too weak", Toast.LENGTH_SHORT).show();
+//                        }else if (!cpass.getText().toString().equals(userCurrentPassword)) {
+//                            Toast.makeText(getApplicationContext(), "Current Password is Wrong.", Toast.LENGTH_SHORT).show();
+//                            dialog.cancel();
+//                        } else {
+//                            FirebaseDatabase.getInstance().getReference().child("UserDetails")
+//                                    .child(currentUser)
+//                                    .child("password").setValue(npass.getText().toString()).addOnSuccessListener(new OnSuccessListener<Void>() {
+//                                @Override
+//                                public void onSuccess(Void aVoid) {
+////                                    UserHolder.getInstance().setPass(npass.getText().toString());
+//                                    Toast.makeText(getApplicationContext(), "Password Changed", Toast.LENGTH_SHORT).show();
+//                                    dialog.cancel();
+//                                }
+//                            }).addOnFailureListener(new OnFailureListener() {
+//                                @Override
+//                                public void onFailure(@NonNull Exception e) {
+//                                    Toast.makeText(getApplicationContext(), "Error", Toast.LENGTH_SHORT).show();
+//                                    dialog.cancel();
+//                                }
+//                            });}
+//                    }
+//                });
+//
+//                dialog.setCancelable(true);
+//                dialog.show();
+//            }
+//        });
         save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

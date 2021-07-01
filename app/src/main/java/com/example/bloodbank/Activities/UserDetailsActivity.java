@@ -35,7 +35,7 @@ import java.util.Calendar;
 import java.util.Locale;
 
 public class UserDetailsActivity extends AppCompatActivity {
-    TextView et_userName, et_email, et_mobileNo, et_password, et_address, et_pinCode, et_city, et_state, et_country;
+    TextView et_userName, et_email, et_mobileNo, et_address, et_pinCode, et_city, et_state, et_country;
     TextView tv_dob;
     RadioGroup radioGroup_gender, radioGroup_suffered;
     RadioButton radioButton_gender, radioButton_suffered;
@@ -55,7 +55,7 @@ public class UserDetailsActivity extends AppCompatActivity {
         et_userName = findViewById(R.id.et_userName);
         et_email = findViewById(R.id.et_email);
         et_mobileNo = findViewById(R.id.et_mobileNo);
-        et_password = findViewById(R.id.et_password);
+//        et_password = findViewById(R.id.et_password);
         et_address = findViewById(R.id.et_address);
         et_pinCode = findViewById(R.id.et_pinCode);
         et_city = findViewById(R.id.et_city);
@@ -108,7 +108,7 @@ public class UserDetailsActivity extends AppCompatActivity {
                 String username = et_userName.getText().toString();
                 String emailId = et_email.getText().toString();
                 String mobileNo = et_mobileNo.getText().toString();
-                String password = et_password.getText().toString();
+//                String password = et_password.getText().toString();
                 String address = et_address.getText().toString();
                 String pinCode = et_pinCode.getText().toString();
                 String city = et_city.getText().toString();
@@ -202,7 +202,7 @@ public class UserDetailsActivity extends AppCompatActivity {
 //                    startActivity(new Intent(getApplicationContext(), MainActivity.class));
 //                    finish();
 //                }
-                if (!validateUserName() | !validatePassword() | !validatePhoneNo() | !validateEmail() | !validateDob() | !validateBloodGroup() | !validateAddress() | !validatePinCode() | !validateCity() | !validateState() | !validateCountry()) {
+                if (!validateUserName()  | !validatePhoneNo() | !validateEmail() | !validateDob() | !validateBloodGroup() | !validateAddress() | !validatePinCode() | !validateCity() | !validateState() | !validateCountry()) {
 
 //                    storeNewUserDetails(username, emailId, mobileNo, password, dob, gender, bloodGroup, address, pinCode, city, state, country, suffered);
 //                    startActivity(new Intent(getApplicationContext(), LoginActivity.class));
@@ -211,8 +211,8 @@ public class UserDetailsActivity extends AppCompatActivity {
                 }
                 else
                 {
-                    storeNewUserDetails(username, emailId, mobileNo, password, dob, gender, bloodGroup, address, pinCode, city, state, country, suffered);
-                    startActivity(new Intent(getApplicationContext(), LoginActivity.class));
+                    storeNewUserDetails(username, emailId, mobileNo, dob, gender, bloodGroup, address, pinCode, city, state, country, suffered);
+                    startActivity(new Intent(getApplicationContext(),RegisterActivity.class));
                     finish();
                     return;
                 }
@@ -222,11 +222,11 @@ public class UserDetailsActivity extends AppCompatActivity {
         });
     }
 
-    private void storeNewUserDetails(String username, String emailId, String mobileNo, String password, String dob, String gender, String bloodGroup, String address, String pinCode, String city, String state, String country, String suffered) {
+    private void storeNewUserDetails(String username, String emailId, String mobileNo, String dob, String gender, String bloodGroup, String address, String pinCode, String city, String state, String country, String suffered) {
         FirebaseDatabase rootNode = FirebaseDatabase.getInstance();
         DatabaseReference reference = rootNode.getReference("UserDetails");
 
-        UserHelperClass addNewUser = new UserHelperClass(username, emailId, mobileNo, password, dob, gender, bloodGroup, address, pinCode, city, state, country, suffered);
+        UserHelperClass addNewUser = new UserHelperClass(username, emailId, mobileNo, dob, gender, bloodGroup, address, pinCode, city, state, country, suffered);
         reference.child(username).setValue(addNewUser);
         UserHelperClass.setCurrentUser_username(et_userName.getText().toString());
     }
@@ -276,29 +276,29 @@ public class UserDetailsActivity extends AppCompatActivity {
         }
     }
 
-    private Boolean validatePassword() {
-        String val = et_password.getText().toString();
-        String passwordVal = "^" +
-                //"(?=.*[0-9])" +         //at least 1 digit
-                //"(?=.*[a-z])" +         //at least 1 lower case letter
-                //"(?=.*[A-Z])" +         //at least 1 upper case letter
-                "(?=.*[a-zA-Z])" +      //any letter
-                "(?=.*[@#$%^&+=])" +    //at least 1 special character
-                "(?=\\S+$)" +           //no white spaces
-                ".{4,}" +               //at least 4 characters
-                "$";
-
-        if (val.isEmpty()) {
-            et_password.setError("Field cannot be empty");
-            return false;
-        } else if (!val.matches(passwordVal)) {
-            et_password.setError("Password is too weak");
-            return false;
-        } else {
-            et_password.setError(null);
-            return true;
-        }
-    }
+//    private Boolean validatePassword() {
+//        String val = et_password.getText().toString();
+//        String passwordVal = "^" +
+//                //"(?=.*[0-9])" +         //at least 1 digit
+//                //"(?=.*[a-z])" +         //at least 1 lower case letter
+//                //"(?=.*[A-Z])" +         //at least 1 upper case letter
+//                "(?=.*[a-zA-Z])" +      //any letter
+//                "(?=.*[@#$%^&+=])" +    //at least 1 special character
+//                "(?=\\S+$)" +           //no white spaces
+//                ".{4,}" +               //at least 4 characters
+//                "$";
+//
+//        if (val.isEmpty()) {
+//            et_password.setError("Field cannot be empty");
+//            return false;
+//        } else if (!val.matches(passwordVal)) {
+//            et_password.setError("Password is too weak");
+//            return false;
+//        } else {
+//            et_password.setError(null);
+//            return true;
+//        }
+//    }
 
     private boolean validateCountry() {
         if (et_country.getText().toString().isEmpty()) {

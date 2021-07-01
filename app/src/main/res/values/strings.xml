@@ -2,6 +2,7 @@
     <string name="app_name">Blood Bank</string>
     <string name="Open">open</string>
     <string name="Close">close</string>
+    <string name="verify_login"><![CDATA[Verify & Login]]></string>
     <string-array name="Blood_Group">
         <item>Blood Group</item>
         <item>A+</item>
