@@ -256,52 +256,44 @@ public class BloodBank_Fragment extends Fragment {
             @Override
             public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
                 if ((Boolean) snapshot.child("O+").getValue() && BG.contains(" O+") && !list.contains(snapshot.child("name").getValue().toString())){
-                    list.clear();
                     if (!list.contains(snapshot.getValue(BloodBankData.class))) {
                         list.add(snapshot.getValue(BloodBankData.class));
                     }
 
                 }
-                if ((Boolean) snapshot.child("A+").getValue() && BG.contains(" A+") && !list.contains(snapshot.child("name").getValue().toString())){
-                    list.clear();
+                else if ((Boolean) snapshot.child("A+").getValue() && BG.contains(" A+") && !list.contains(snapshot.child("name").getValue().toString())){
                     if (!list.contains(snapshot.getValue(BloodBankData.class))) {
                         list.add(snapshot.getValue(BloodBankData.class));
                     }
                 }
-                if ((Boolean) snapshot.child("B+").getValue() && BG.contains(" B+") && !list.contains(snapshot.child("name").getValue().toString())){
-                    list.clear();
+                else if ((Boolean) snapshot.child("B+").getValue() && BG.contains(" B+") && !list.contains(snapshot.child("name").getValue().toString())){
                     if (!list.contains(snapshot.getValue(BloodBankData.class))) {
                         list.add(snapshot.getValue(BloodBankData.class));
                     }
                 }
-                if ((Boolean) snapshot.child("AB+").getValue() && BG.contains(" AB+") && !list.contains(snapshot.child("name").getValue().toString())){
-                    list.clear();
+                else if ((Boolean) snapshot.child("AB+").getValue() && BG.contains(" AB+") && !list.contains(snapshot.child("name").getValue().toString())){
                     if (!list.contains(snapshot.getValue(BloodBankData.class))) {
                         list.add(snapshot.getValue(BloodBankData.class));
                     }
                 }
 
-                if ((Boolean) snapshot.child("O-").getValue() && BG.contains(" O-") && !list.contains(snapshot.child("name").getValue().toString())){
-                    list.clear();
+                else if ((Boolean) snapshot.child("O-").getValue() && BG.contains(" O-") && !list.contains(snapshot.child("name").getValue().toString())){
                     if (!list.contains(snapshot.getValue(BloodBankData.class))) {
                         list.add(snapshot.getValue(BloodBankData.class));
                     }
 
                 }
-                if ((Boolean) snapshot.child("A-").getValue() && BG.contains(" A-") && !list.contains(snapshot.child("name").getValue().toString())){
-                    list.clear();
+                else if ((Boolean) snapshot.child("A-").getValue() && BG.contains(" A-") && !list.contains(snapshot.child("name").getValue().toString())){
                     if (!list.contains(snapshot.getValue(BloodBankData.class))) {
                         list.add(snapshot.getValue(BloodBankData.class));
                     }
                 }
-                if ((Boolean) snapshot.child("B-").getValue() && BG.contains(" B-") && !list.contains(snapshot.child("name").getValue().toString())){
-                    list.clear();
+                else if ((Boolean) snapshot.child("B-").getValue() && BG.contains(" B-") && !list.contains(snapshot.child("name").getValue().toString())){
                     if (!list.contains(snapshot.getValue(BloodBankData.class))) {
                         list.add(snapshot.getValue(BloodBankData.class));
                     }
                 }
-                if ((Boolean) snapshot.child("AB-").getValue() && BG.contains(" AB-") && !list.contains(snapshot.child("name").getValue().toString())){
-                    list.clear();
+                else if ((Boolean) snapshot.child("AB-").getValue() && BG.contains(" AB-") && !list.contains(snapshot.child("name").getValue().toString())){
                     if (!list.contains(snapshot.getValue(BloodBankData.class))) {
                         list.add(snapshot.getValue(BloodBankData.class));
                     }

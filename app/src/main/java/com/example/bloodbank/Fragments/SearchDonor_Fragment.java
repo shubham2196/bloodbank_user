@@ -66,10 +66,12 @@ public class SearchDonor_Fragment extends Fragment  {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 if (parent.getItemAtPosition(position).equals("Blood Group"))
                 {
+                    search.setText("");
                     new Upload().execute();
                         }
                 else
                 {
+                    search.setText("");
                     String selectedBloodGroup=arrayAdapter.getItem(position);
                     showSelectedBloodGroupDonor(selectedBloodGroup);
                 }

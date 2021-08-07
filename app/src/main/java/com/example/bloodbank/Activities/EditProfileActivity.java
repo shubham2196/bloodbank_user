@@ -216,8 +216,7 @@ public class EditProfileActivity extends AppCompatActivity {
         iv_back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(EditProfileActivity.this,MainActivity.class);
-                startActivity(intent);
+                finish();
             }
         });
 //        changePasswordBtn.setOnClickListener(new View.OnClickListener() {
