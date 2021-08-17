@@ -35,7 +35,7 @@ import java.util.concurrent.TimeUnit;
 
 public class RegisterActivity extends AppCompatActivity {
     Button submit;
-    TextView et_mobileNo, createNewAccount;
+    TextView et_mobileNo, createNewAccount, btn_how_to_use;
     FirebaseAuth firebaseAuth;
     String otpId;
     private  Boolean check=false;
@@ -80,12 +80,18 @@ public class RegisterActivity extends AppCompatActivity {
         et_mobileNo = findViewById(R.id.et_mobileNo);
         submit = findViewById(R.id.submit);
         createNewAccount = findViewById(R.id.btn_createAccount);
+        btn_how_to_use = findViewById(R.id.btn_how_to_use);
+        btn_how_to_use.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(RegisterActivity.this, HowToUseActivity.class));
+            }
+        });
         createNewAccount.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), UserDetailsActivity.class);
                 startActivity(intent);
-                finish();
             }
         });
 
@@ -105,6 +111,7 @@ public class RegisterActivity extends AppCompatActivity {
                         Intent intent = new Intent(getApplicationContext(), VerifyPhoneNo.class);
                         intent.putExtra("phoneNo", mobileNo);
                         startActivity(intent);
+                        finish();
                     }
                     else
                         {
