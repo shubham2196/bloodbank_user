@@ -7,6 +7,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -22,6 +24,9 @@ import android.widget.Toolbar;
 import com.example.bloodbank.Activities.MainActivity;
 import com.example.bloodbank.R;
 import com.example.bloodbank.UserHelperClass;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
@@ -35,8 +40,9 @@ import java.util.Calendar;
 import java.util.Locale;
 
 public class UserDetailsActivity extends AppCompatActivity {
-    TextView et_userName, et_email, et_mobileNo, et_address, et_pinCode, et_city, et_state, et_country;
+    TextView et_userName, et_mobileNo, et_address, et_pinCode, et_city, et_state, et_country;
     TextView tv_dob;
+    EditText et_email;
     RadioGroup radioGroup_gender, radioGroup_suffered;
     RadioButton radioButton_gender, radioButton_suffered;
     Spinner spinner_bloodGroup;
@@ -44,8 +50,8 @@ public class UserDetailsActivity extends AppCompatActivity {
     int day;
     int month;
     int year;
+    boolean check = false;
     String suffered, gender;
-
 
 
     @Override
@@ -83,6 +89,26 @@ public class UserDetailsActivity extends AppCompatActivity {
                     }
                 }, year, month, day);
                 datePickerDialog.show();
+
+            }
+        });
+
+        et_email.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if (!s.toString().equals(s.toString().toLowerCase())) {
+                    et_email.setText(s.toString().toLowerCase());
+                    et_email.setSelection(et_email.getText().length());
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
 
             }
         });
@@ -202,19 +228,14 @@ public class UserDetailsActivity extends AppCompatActivity {
 //                    startActivity(new Intent(getApplicationContext(), MainActivity.class));
 //                    finish();
 //                }
-                if (!validateUserName()  | !validatePhoneNo() | !validateEmail() | !validateDob() | !validateBloodGroup() | !validateAddress() | !validatePinCode() | !validateCity() | !validateState() | !validateCountry()) {
+                if (!validateUserName() || !validatePhoneNo() || !validateEmail() || !validateDob() || !validateBloodGroup() || !validateAddress() || !validatePinCode() || !validateCity() || !validateState() || !validateCountry()) {
 
 //                    storeNewUserDetails(username, emailId, mobileNo, password, dob, gender, bloodGroup, address, pinCode, city, state, country, suffered);
 //                    startActivity(new Intent(getApplicationContext(), LoginActivity.class));
 //                    finish();
 //                    return;
-                }
-                else
-                {
+                } else {
                     storeNewUserDetails(username, emailId, mobileNo, dob, gender, bloodGroup, address, pinCode, city, state, country, suffered);
-                    startActivity(new Intent(getApplicationContext(),RegisterActivity.class));
-                    finish();
-                    return;
                 }
 
 
@@ -226,14 +247,29 @@ public class UserDetailsActivity extends AppCompatActivity {
         FirebaseDatabase rootNode = FirebaseDatabase.getInstance();
         DatabaseReference reference = rootNode.getReference("UserDetails");
 
+
         UserHelperClass addNewUser = new UserHelperClass(username, emailId, mobileNo, dob, gender, bloodGroup, address, pinCode, city, state, country, suffered);
-        reference.child(username).setValue(addNewUser);
-        UserHelperClass.setCurrentUser_username(et_userName.getText().toString());
+        reference.child(username).setValue(addNewUser).addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                Toast.makeText(UserDetailsActivity.this, "Registration Successful", Toast.LENGTH_SHORT).show();
+                UserHelperClass.setCurrentUser_username(et_userName.getText().toString());
+                startActivity(new Intent(getApplicationContext(), RegisterActivity.class));
+                finish();
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Toast.makeText(UserDetailsActivity.this, "Error", Toast.LENGTH_SHORT).show();
+            }
+        });
+
     }
 
     private Boolean validateUserName() {
         if (et_userName.getText().toString().isEmpty()) {
             et_userName.setError("Field cannot be empty");
+            et_userName.requestFocus();
             return false;
         } else {
             et_userName.setError(null);
@@ -244,13 +280,10 @@ public class UserDetailsActivity extends AppCompatActivity {
 
     private Boolean validateEmail() {
         String val = et_email.getText().toString();
-        String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
 
         if (val.isEmpty()) {
-            et_email.setError("Field cannot be empty");
-            return false;
-        } else if (!val.matches(emailPattern)) {
-            et_email.setError("Invalid email address");
+            et_email.setError("Email should not be Empty & do not contain a Capital Letter");
+            et_email.requestFocus();
             return false;
         } else {
             et_email.setError(null);
@@ -263,14 +296,13 @@ public class UserDetailsActivity extends AppCompatActivity {
 
         if (val.isEmpty()) {
             et_mobileNo.setError("Field cannot be empty");
+            et_mobileNo.requestFocus();
             return false;
-        }
-        else if (!(val.length()==10)) {
+        } else if (!(val.length() == 10)) {
             et_mobileNo.setError("Invalid");
-            return  false;
-        }
-            else
-         {
+            et_mobileNo.requestFocus();
+            return false;
+        } else {
             et_mobileNo.setError(null);
             return true;
         }
@@ -303,6 +335,7 @@ public class UserDetailsActivity extends AppCompatActivity {
     private boolean validateCountry() {
         if (et_country.getText().toString().isEmpty()) {
             et_country.setError("Field cannot be empty");
+            et_country.requestFocus();
             return false;
         } else {
             et_country.setError(null);
@@ -313,6 +346,7 @@ public class UserDetailsActivity extends AppCompatActivity {
     private boolean validateState() {
         if (et_state.getText().toString().isEmpty()) {
             et_state.setError("Field cannot be empty");
+            et_state.requestFocus();
             return false;
         } else {
             et_state.setError(null);
@@ -323,6 +357,7 @@ public class UserDetailsActivity extends AppCompatActivity {
     private boolean validateCity() {
         if (et_city.getText().toString().isEmpty()) {
             et_city.setError("Field cannot be empty");
+            et_city.requestFocus();
             return false;
         } else {
             et_city.setError(null);
@@ -333,9 +368,11 @@ public class UserDetailsActivity extends AppCompatActivity {
     private boolean validatePinCode() {
         if (et_pinCode.getText().toString().isEmpty()) {
             et_pinCode.setError("Field cannot be empty");
+            et_pinCode.requestFocus();
             return false;
         } else if (et_pinCode.getText().toString().length() < 6) {
             et_pinCode.setError("Invalid PinCode");
+            et_pinCode.requestFocus();
             return false;
         } else {
             et_pinCode.setError(null);
@@ -346,6 +383,7 @@ public class UserDetailsActivity extends AppCompatActivity {
     private boolean validateAddress() {
         if (et_address.getText().toString().isEmpty()) {
             et_address.setError("Field cannot be empty");
+            et_address.requestFocus();
             return false;
         } else {
             et_address.setError(null);
@@ -369,6 +407,7 @@ public class UserDetailsActivity extends AppCompatActivity {
 
         if (val.isEmpty()) {
             tv_dob.setError("Field cannot be empty");
+            tv_dob.requestFocus();
             return false;
         } else {
             tv_dob.setError(null);
